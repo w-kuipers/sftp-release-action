@@ -1,0 +1,11 @@
+name: "Package Dtch. Digitals Theme"
+description: "Package only the relevant source for Dtch. Digitals WordPress themes"
+inputs:
+  version:
+    description: "Version number for the current release"
+    required: true
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+  - ${{ inputs.version }}
