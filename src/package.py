@@ -5,7 +5,7 @@
 import os
 import subprocess
 import sys
-from .utils import copydir, copyfile
+from src.utils import copydir, copyfile
 
 ## Get version number
 if len(sys.argv) == 1 or not sys.argv[1][0] == "p" or not sys.argv[1][0] == "p":
