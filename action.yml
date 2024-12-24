@@ -1,11 +1,33 @@
 name: "Package Dtch. Digitals Theme"
 description: "Package only the relevant source for Dtch. Digitals WordPress themes"
+
 inputs:
   version:
     description: "Version number for the current release"
     required: true
+  host:
+    description: "Server host IP"
+    required: true
+  port:
+    description: "Server SSH port"
+    required: true
+  user:
+    description: "SSH user"
+    required: true
+  password:
+    description: "SSH user password"
+    required: true
+  path:
+    description: "Distribution path"
+    required: true
+
 runs:
   using: "docker"
   image: "Dockerfile"
   args:
     - ${{ inputs.version }}
+    - ${{ inputs.host }}
+    - ${{ inputs.port }}
+    - ${{ inputs.user }}
+    - ${{ inputs.password }}
+    - ${{ inputs.path }}
