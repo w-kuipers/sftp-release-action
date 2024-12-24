@@ -2,10 +2,15 @@
 # Package only the relevant source for serving the site
 ####
 
+
 import os
 import subprocess
 import sys
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from src.utils import copydir, copyfile
+
+print(sys.argv)
 
 ## Get version number
 if len(sys.argv) == 1 or not sys.argv[1][0] == "p" or not sys.argv[1][0] == "p":
