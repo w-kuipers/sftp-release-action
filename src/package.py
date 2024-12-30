@@ -27,10 +27,14 @@ def package(version: str):
         "acf-json",
         "assets",
         "includes",
-        "lib",
         "languages",
         "template-parts",
-        "templates"
+        "templates",
+
+        ## Legacy
+        "lib",
+        "page-templates",
+        "post-templates",
     ]
 
     ## Add user defined indluded dirs
