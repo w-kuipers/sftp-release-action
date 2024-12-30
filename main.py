@@ -11,7 +11,7 @@ def main():
     validate_path(path)
 
     package(version)
-    clean_dest(host, port, user, password, path)
+    # clean_dest(host, port, user, password, path)
     upload_source("./package", path, host, port, user, password)
 
 if __name__ == "__main__":
