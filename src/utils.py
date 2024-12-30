@@ -48,10 +48,8 @@ def validate_path(path: str):
     p = os.path.normpath(path).split("/")
 
     if not p[-2] == "themes":
-        print("This path does not seem to be a WordPess theme!")
-        exit(1)
+        raise Exception("This path does not seem to be a WordPess theme!")
 
     if not p[-3] == "wp-content":
-        print("This path does not seem to be a WordPess theme!")
-        exit(1)
+        raise Exception("This path does not seem to be a WordPess theme!")
 
