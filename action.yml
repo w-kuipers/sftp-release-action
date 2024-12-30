@@ -10,7 +10,8 @@ inputs:
     required: true
   port:
     description: "Server SSH port"
-    required: true
+    required: false
+    default: 22
   user:
     description: "SSH user"
     required: true
@@ -20,11 +21,17 @@ inputs:
   path:
     description: "Distribution path"
     required: true
+  node_version: 
+    description: "Version of node to use for building"
+    required: false
+    default: 22
+
 
 runs:
   using: "docker"
   image: "Dockerfile"
   args:
+    - ${{ inputs.node_version }}
     - ${{ inputs.version }}
     - ${{ inputs.host }}
     - ${{ inputs.port }}

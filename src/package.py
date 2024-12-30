@@ -7,14 +7,15 @@ import subprocess
 import json
 from src.utils import copydir, copyfile
 
-def package(version: str):
+def package(version: str, build: bool):
     ## Create package dir
     if not os.path.isdir("./package"):
         os.mkdir("./package")
 
     ## Build the NODE source
-    subprocess.Popen(["npm", "install"]).wait()
-    subprocess.Popen(["npm", "run", "build"]).wait()
+    if build:
+        subprocess.Popen(["npm", "install"]).wait()
+        subprocess.Popen(["npm", "run", "build"]).wait()
 
     ## Get user defined included files/dirs
     user_config = {}
@@ -42,7 +43,7 @@ def package(version: str):
         dirs = list(set(dirs + user_config["includeDirs"]))
 
     ## All PHP files
-    files = ["style.css", "screenshot.png"]
+    files = ["style.css", "style.min.css", "screenshot.png"]
 
     ## Add user defined indluded files
     if "includeFiles" in user_config and isinstance(user_config["includeFiles"], list):

@@ -10,12 +10,13 @@ def copyfile(src: str):
         shutil.copyfile(src, os.path.join("./package", src))
 
 def validate_arguments(args):
-    if len(args) != 7:  # Including script name
+    if len(args) != 8:  # Including script name
         print("Invalid number of arguments. Usage:")
-        print("python main.py <version> <host> <user> <password> <path>")
+        print("python main.py <version> <host> <port> <user> <password> <path> <--build>")
         exit(1)
 
-    _, version, host, port, user, password, path = args
+    _, version, host, port, user, password, path, build = args
+
 
     if not version.startswith("p") or len(version) < 2:
         print("Invalid version. Ensure the version starts with 'p' (e.g., v1.0.0).")
@@ -41,7 +42,9 @@ def validate_arguments(args):
         print("Invalid path. Provide a valid distribution path.")
         exit(1)
 
-    return version, host, port, user, password, path
+    build = True if build == "--build" else False
+
+    return version, host, port, user, password, path, build
 
 def validate_path(path: str):
 
