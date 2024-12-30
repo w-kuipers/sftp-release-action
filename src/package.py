@@ -14,7 +14,7 @@ def package(version: str, build: bool):
 
     ## Build the NODE source
     if build:
-        subprocess.Popen(["npm", "install"]).wait()
+        subprocess.Popen(["npm", "install", "--force"]).wait()
         subprocess.Popen(["npm", "run", "build"]).wait()
 
     ## Get user defined included files/dirs
