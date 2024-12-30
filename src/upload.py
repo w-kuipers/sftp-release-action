@@ -1,27 +1,26 @@
 import os
 import paramiko
 from scp import SCPClient
+import subprocess
+
+package = "package.tar.gz"
 
 def upload_source(local_path, remote_path, host, port, user, password):
     try:
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh.connect(hostname=host, port=port, username=user, password=password)
+
+        subprocess.Popen(["tar", "-czf", package, "-C", local_path, "."]).wait()
         
         with SCPClient(ssh.get_transport()) as scp:
-            for root, dirs, files in os.walk(local_path):
-                relative_path = os.path.relpath(root, local_path)
+            scp.put(package, os.path.join(remote_path, package))
+            stdin, stdout, stderr = ssh.exec_command(f"cd {remote_path} && tar -xzf {package}")
+            stdout.channel.recv_exit_status()  # Wait for the command to complete
 
-                dirpath = os.path.join(remote_path, relative_path)
-                for dir in dirs:
-                    stdin, stdout, stderr = ssh.exec_command(f"mkdir -p {os.path.join(dirpath, dir)}")
-                    stdout.channel.recv_exit_status()  # Wait for the command to complete
+            print("stderr: ", stderr.read().decode())
 
-                for file in files:
-                    local_file_path = os.path.join(root, file)
-                    remote_file_path = os.path.join(remote_path, relative_path, file)
-                    print(f"Uploading {local_file_path} to {remote_file_path}")
-                    scp.put(local_file_path, remote_file_path)
+            ssh.exec_command(f"rm {os.path.join(remote_path, package)}")
         
         print("All files uploaded successfully.")
     
