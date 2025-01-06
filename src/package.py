@@ -31,6 +31,7 @@ def package(version: str, build: bool):
         "languages",
         "template-parts",
         "templates",
+        "woocommerce",
 
         ## Legacy
         "lib",
