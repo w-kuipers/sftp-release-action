@@ -7,6 +7,7 @@ from src.utils import validate_arguments, validate_path
 
 
 def main():
+    print(sys.argv)
     build, protocol, version, host, port, user, password, path = validate_arguments(
         sys.argv
     )

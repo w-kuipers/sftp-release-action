@@ -43,13 +43,13 @@ def package(version: str, build: bool):
     if "includeDirs" in user_config and isinstance(user_config["includeDirs"], list):
         dirs = list(set(dirs + user_config["includeDirs"]))
 
-    ## All PHP files
     files = ["style.css", "style.min.css", "screenshot.png"]
 
     ## Add user defined indluded files
     if "includeFiles" in user_config and isinstance(user_config["includeFiles"], list):
         files = list(set(files + user_config["includeFiles"]))
 
+    ## All PHP files
     for f in os.listdir(basedir):
         if f.endswith(".php"):
             path = os.path.join(basedir, f)
