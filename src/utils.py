@@ -48,7 +48,7 @@ def validate_arguments(args):
     if not protocol in ["ftp", "sftp"]:
         raise Exception("Protocol must be either 'ftp' or 'sftp'.")
 
-    build = True if build == "--build" else False
+    build = True if build == "build" else False
 
     return build, protocol, version, host, int(port), user, password, path
 
