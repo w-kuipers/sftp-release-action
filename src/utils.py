@@ -20,7 +20,7 @@ def validate_arguments(args):
 
     _, build, protocol, version, host, port, user, password, path = args
 
-    if not version.startswith("p") or len(version) < 2:
+    if not (version.startswith("p") or version.startswith("s")) or len(version) < 2:
         raise Exception(
             "Invalid version. Ensure the version starts with 'p' (e.g., v1.0.0)."
         )
