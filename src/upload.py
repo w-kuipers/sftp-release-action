@@ -6,7 +6,6 @@ import subprocess
 package = "package.tar.gz"
 
 def upload_source(local_path, remote_path, host, port, user, password):
-    # try:
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     ssh.connect(hostname=host, port=port, username=user, password=password)
@@ -24,8 +23,4 @@ def upload_source(local_path, remote_path, host, port, user, password):
     
     print("All files uploaded successfully.")
     
-    # except Exception as e:
-    #     print(f"An error occurred: {e}")
-    
-    # finally:
     ssh.close()
